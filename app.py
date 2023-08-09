@@ -18,7 +18,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 # config
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fees.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fees.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -65,7 +65,12 @@ def user_lookup_callback(_jwt_header, jwt_data):
     return User.query.filter_by(user_id=identity).one_or_none()
 
 
+class Home(Resource):
+    def get(self):
+        return {"api": "fees api"}
 # user
+
+
 class UserResource(Resource):
     def get(self, user_id):
         user = User.query.get(user_id)
@@ -188,7 +193,7 @@ class CaseResource(Resource):
 
 
 # Add the resources to the API
-
+api.add_resource(Home, '/')
 api.add_resource(UserResource, '/users/<int:user_id>')
 api.add_resource(UserListResource, '/users')
 api.add_resource(FeesResource, '/fees/<int:fees_id>')
