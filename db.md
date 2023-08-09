@@ -1,0 +1,1 @@
+export DATABASE_URI=postgresql://admin:63TbCLfc2sy1bMpwTTm5EBnA1QjM14DZ@dpg-cj9k3pavvtos73euc6fg-a.oregon-postgres.render.com/core_fees_bc8n
